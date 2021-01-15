@@ -86,7 +86,6 @@ export default {
     submit() {
       if (this.$store.state.portfolio.length > 0) {
         this.$http.put("", this.$store.state.portfolio).then(response => {
-          console.log(response);
         });
       }
     },
@@ -99,7 +98,6 @@ export default {
           })
           .then(data => {
             const resultsArr = data.map(el => el);
-            console.log(resultsArr);
             this.$store.state.prices = resultsArr.map(el => el.price);
             this.$store.state.names = resultsArr.map(el => el.name);
             this.$store.state.fetchData = true;

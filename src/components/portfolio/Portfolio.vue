@@ -17,7 +17,6 @@ export default {
 
 <style lang='scss' scoped>
   .stocks {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    @include stocksGrid;
   }
 </style>

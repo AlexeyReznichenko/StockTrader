@@ -28,6 +28,8 @@ export default {
             'key',
             'styleDisabledButtons',
         ]),
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         buyStocks() {
             if (this.inputParsed && typeof(this.inputParsed) == 'number') {
                 let indexOf, cost, portfolioMap, neededElement;
@@ -66,6 +68,8 @@ export default {
                 }
             }
         },
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         selectStock() {
             this.selectedIndex = this.index;
         }
@@ -74,12 +78,18 @@ export default {
         inputParsed() {
             return parseInt(this.input);
         },
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         portfolio() {
             return this.$store.state.portfolio;
         },
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         stocks() {
             return this.$store.state.stocks;
         },
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         isDisable() {
             this.$store.dispatch('isDisable', 
             {btn: 'stock__buy-button', input: this.inputParsed, darkColor: '#5DB75A',
@@ -87,68 +97,20 @@ export default {
         }
         
     },
+
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     mounted() {
         this.styleDisabledButtons({btn: 'stock__buy-button', lightColor: '#94D096'});
     }
 }
 </script>
 
-    <style lang='scss' scoped>
-        .stock {
-            border: 1px solid #e0dcdc;
-            border-radius: .5rem;
-            margin: 0rem 1.5rem 2rem;
+<style lang='scss' scoped>
+    @include stock(#ddefd6);        
 
-            &__top {
-                background-color: #DDEFD6;
-                padding: 1rem 1.5rem;
-                display: flex;
-                align-items: center;
-            }
-
-            &__bottom {
-                padding: 1.5rem;
-                display: flex;
-                justify-content: space-between;
-            }
-
-            &__name {
-                color: #315535;
-                font-size: 1.8rem;
-                font-weight: 600;
-                margin-right: 3px;
-            }
-
-            &__price {
-                font-size: 1.1rem;
-                margin-bottom: -3px;
-            }
-
-            &__quantity-input {
-                padding: 1rem 1.5rem;
-                border: 1px solid #afadad;
-                border-radius: .5rem;
-
-                &:focus, &:active {
-                    outline: none
-                }
-            }
-
-            &__buy-button {
-                color: #fff;
-                font-weight: 600;
-                border: none;
-                border-radius: .5rem;
-                padding: 0 1.5rem;
-                transition: all .2s;
-
-                &:focus, &:active {
-                    outline: none
-                }
-            }
-        }
-        .hover:hover {
-                background-color: darken(#5DB75A, 10%) !important;
-                cursor: pointer;
-        }
-    </style>
+    .hover:hover {
+            background-color: darken(#5DB75A, 10%) !important;
+            cursor: pointer;
+    }
+</style>

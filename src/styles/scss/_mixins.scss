@@ -1,0 +1,68 @@
+@mixin stock($top-color) {
+  .stock {
+    border: 1px solid $color-grey-light-2;
+    border-radius: 0.5rem;
+    margin: 0rem 1.5rem 2rem;
+
+    &__top {
+      background-color: $top-color;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+
+    &__bottom {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__name {
+      color: #315535;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-right: 3px;
+    }
+
+    &__price {
+      font-size: 1.1rem;
+      margin-bottom: -3px;
+    }
+
+    &__info {
+      font-size: 1.1rem;
+      margin-bottom: -3px;
+    }
+
+    &__quantity-input {
+      padding: 1rem 1.5rem;
+      border: 1px solid #afadad;
+      border-radius: 0.5rem;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+
+    &__buy-button,
+    &__sell-button {
+      color: $color-white;
+      font-weight: 600;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0 1.5rem;
+      transition: all 0.2s;
+
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+  }
+}
+
+@mixin stocksGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}

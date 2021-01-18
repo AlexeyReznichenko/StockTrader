@@ -4,31 +4,31 @@
       <div class="header__nav__container">
         <router-link
           tag="li"
-          to=""
+          :to="{ name: 'home' }"
           active-class="active"
-          class="header__item header__title"
+          class="header__item header__title" exact
           ><a class="header__link">Stock Trader</a></router-link
         >
         <router-link
           tag="li"
           :to="{ name: 'portfolio' }"
           active-class="active"
-          class="header__item"
+          class="header__item" exact
           ><a class="header__link">Portfolio</a></router-link
         >
         <router-link
           tag="li"
           :to="{ name: 'stocks' }"
           active-class="active"
-          class="header__item"
+          class="header__item" exact
           ><a class="header__link">Stocks</a></router-link
         >
       </div>
       <div class="header__nav__container">
-        <li class="header__item" @click="endDay">End day</li>
+        <li class="header__item header__endDay" @click="endDay">End day</li>
         <button class="header__item dropdown">
           Save & Load
-          <i class="fa fa-caret-down"></i>
+          <i class="fa fa-caret-down dropdown__icon"></i>
           <div class="dropdown__content">
             <a class="dropdown__option" @click="submit">Save Data</a>
             <a class="dropdown__option" @click="fetchData">Load Data</a>
@@ -52,9 +52,7 @@ export default {
         );
       };
 
-      console.log(this.$store.state.stocks);
       this.$store.state.stocks.forEach(stock => {
-        console.log(stock, stock.price);
         if (stock.price > 0 && stock.price <= 20) {
           stock.price = stockPrice(stock.price, 3, 6);
 
@@ -83,12 +81,16 @@ export default {
         JSON.stringify(this.$store.state.portfolio)
       );
     },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     submit() {
       if (this.$store.state.portfolio.length > 0) {
         this.$http.put("", this.$store.state.portfolio).then(response => {
         });
       }
     },
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     fetchData() {
       if (this.$store.state.portfolio.length > 0) {
         this.$http
@@ -106,6 +108,7 @@ export default {
     }
   },
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
   created() {
     const stocks = JSON.parse(localStorage.getItem("stocks"));
     const portfolio = JSON.parse(localStorage.getItem("portfolio"));
@@ -128,25 +131,39 @@ export default {
 
 <style lang="scss">
 .active {
-  color: black;
+  background-color: darken($color-grey-light, 20%);
+
+  .header__link {
+  color: $color-white !important;
+
+    &:hover {
+      cursor: default !important;
+    }
+  }
+
+  &:hover {
+    background-color: darken($color-grey-light, 20%) !important;
+    cursor: default !important;
+  }
 }
 
 .dropdown {
   border: none;
   outline: none;
-  background-color: #f8f8f7;
-  color: #000;
+  background-color: $color-grey-light;
+  color: $color-black;
   font-size: 1.6rem;
+  padding: 1.95rem 2rem !important;
 
   &__content {
     display: none;
     width: 13%;
-    background-color: #fff;
+    background-color: $color-white;
     position: absolute;
     top: 8.4rem;
     right: 21.5rem;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    border: 1px solid #e0dcdc;
+    box-shadow: 0px 8px 16px 0px $color-black-transparent;
+    border: 1px solid $color-grey-light-2;
     border-radius: 0.5rem;
   }
 
@@ -154,18 +171,26 @@ export default {
     display: block;
     padding: 0.8rem 2rem;
     text-align: left;
-    color: #000;
+    color: $color-black;
     font-size: 1.5rem;
     font-weight: 100;
     transition: all 0.5s;
 
     &:hover {
-      background-color: darken(#fff, 10%);
+      background-color: darken($color-white, 10%);
     }
+  }
+
+  &:focus {
+      background-color: darken($color-grey-light, 10%);
   }
 
   &:focus &__content {
     display: block;
+  }
+
+  &:focus &__icon {
+    transform: rotate(180deg);
   }
 
   &:hover {
@@ -174,10 +199,11 @@ export default {
 }
 
 .header {
-  background-color: #f8f8f7;
-  border: 1px solid #e0dcdc;
+  background-color: $color-grey-light;
+  border: 1px solid $color-grey-light-2;
   border-radius: 0.5rem;
-  color: #000;
+  color: $color-black;
+  font-weight: 900;
   padding: 0;
   margin-bottom: 2rem;
 
@@ -199,16 +225,21 @@ export default {
   &__item,
   &__funds,
   &__link {
-    color: #000;
+    color: $color-black;
     text-decoration: none;
     padding: 1.7rem 2rem;
     transition: all 0.5s;
   }
 
   &__item:hover {
-    color: black;
-    background-color: darken(#f8f8f7, 10%);
+    color: $color-black;
+    background-color: darken($color-grey-light, 10%);
     cursor: pointer;
+  }
+
+  &__endDay {
+    font-weight: 100;
+    padding: 1.95rem 2rem;
   }
 
   &__funds {
@@ -218,7 +249,7 @@ export default {
   &__title {
     font-size: 2rem;
     font-weight: 900;
-    padding: 1.2rem;
+    padding: 1.43rem;
   }
 }
 </style>

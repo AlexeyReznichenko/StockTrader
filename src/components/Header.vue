@@ -34,7 +34,7 @@
             <a class="dropdown__option" @click="fetchData">Load Data</a>
           </div>
         </button>
-        <li class="header__funds">Funds: ${{ this.$store.state.funds }}</li>
+        <li class="header__funds">Funds: ${{ this.$store.state.funds.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") }}</li>
       </div>
     </ul>
   </header>

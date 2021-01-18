@@ -3,7 +3,7 @@
       <h1 class="heading-primary">Trade or View your Portfolio</h1>
       <p class="home__paragraph">You may Save & Load your Data</p>
       <p class="home__paragraph">Click on 'End Day' to begin a new Day</p>
-      <h3 class="heading-tertiary">Your Funds: ${{this.$store.state.funds}}</h3>
+      <h3 class="heading-tertiary">Your Funds: ${{this.$store.state.funds.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}}</h3>
   </div>
 </template>
 
